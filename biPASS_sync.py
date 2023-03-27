@@ -160,14 +160,30 @@ class Master():
 			comm.send(np.array([]), dest = worker_id)
 
 	def write_summary_csv(self):
-		new_summary_row = pd.DataFrame([
-			[len(self.contenders), 
-			len([system for system in self.good_systems if system not in self.contenders]), 
-			self.cycle, 
-			np.sum(self.reps), 
-			time.process_time() - self.wallclock_time]], 
-			columns=["Contenders", "False Eliminations", "Cycles", "Total Effort", "Time"])
-		new_summary_row.to_csv("biPASS_sync_master_summary_" + str(output_file_name) + ".csv", mode="a", header=(trial==0))
+		sample_means = np.divide(self.running_sums, self.reps)
+		new_summary_row = pd.DataFrame([[np.argmax(sample_means),
+										np.max(sample_means),
+										self.standard,
+										len(self.contenders),
+										len([system for system in self.good_systems if system not in self.contenders]),
+										self.cycle,
+										np.sum(self.reps),
+										time.process_time() - self.wallclock_time]],
+		columns=["Best",
+				"Best Sample Mean",
+				"Standard",
+				"Contenders",
+				"False Eliminations",
+				"Cycles",
+				"Total Effort",
+				"Time"])
+		new_summary_row.to_csv("biPASS_sync_master_summary_" + str(output_file_name) + ".csv", mode="a", 
+			header=(trial == 0))
+
+	def write_termination_csv(self):
+		np.savetxt(str(output_file_name) + "_reps.csv", self.reps, delimiter=",")
+		np.savetxt(str(output_file_name) + "_means.csv", np.divide(self.running_sums, self.reps), delimiter=",")
+		np.savetxt(str(output_file_name) + "_variances.csv", self.est_variances, delimiter=",")
 
 class Worker():
 
@@ -224,6 +240,8 @@ def biPASS(trial):
 		master.terminate_remaining_workers()
 
 		master.write_summary_csv()
+
+		master.write_termination_csv()
 		
 		return 0
 		

@@ -9,9 +9,9 @@ import time
 ##################################################################################
 
 true_standard = 100
-total_num = 10
+total_num = 100
 
-true_means = np.arange(1, 10+1)
+true_means = np.arange(1, 100+1)
 true_variances = np.full(total_num, 1)
 
 def simulation_model(system_id, worker_bit_generator, current_num_reps):
@@ -31,7 +31,7 @@ def run_length(n):
     if n == 0:
         return 10
     else:
-        return 10
+        return 100
     
 def update_standard(running_sums, reps, contenders):
     standard = np.average(np.divide(running_sums[contenders], reps[contenders]))
@@ -40,9 +40,7 @@ def update_standard(running_sums, reps, contenders):
 init_standard = -np.inf
 known_variance = False
 scaling_type = "custom"
-num_cycles = 10
+num_cycles = np.inf
 output_mode = "profile"
 
 max_total_reps = np.full(10, np.inf)
-
-base_bit_generator_seed = 100

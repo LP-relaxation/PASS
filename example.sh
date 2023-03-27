@@ -1,0 +1,1 @@
+for rep in {0..4}; do mpirun -np 4 python biPASS_sync.py "example_config_output" "example_config" "$rep"; done
