@@ -11,7 +11,7 @@ bi-PASS Sync uses simulation optimization to maximize an unconstrained objective
 To run the example file, run
 sh example.sh
 
-To run bi-PASS on another problem, create your own config file based on example_config.py
+To run bi-PASS on another problem, create your own config file based on example_config.py.
 The main function to adjust in the config file is simulation_model().
 If the true standard, true means, or true variances are not known, these can be set to -np.inf.
 
