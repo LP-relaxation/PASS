@@ -44,3 +44,5 @@ num_cycles = np.inf
 output_mode = "profile"
 
 max_total_reps = np.full(10, np.inf)
+
+base_bit_generator_seed = 100
