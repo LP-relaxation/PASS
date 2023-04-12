@@ -8,7 +8,7 @@ import time
 
 ##################################################################################
 
-true_standard = 100
+true_standard = 1000
 total_num = 100
 
 true_means = np.arange(1, 100+1)
@@ -31,7 +31,7 @@ def run_length(n):
     if n == 0:
         return 10
     else:
-        return 100
+        return 10
     
 def update_standard(running_sums, reps, contenders):
     standard = np.average(np.divide(running_sums[contenders], reps[contenders]))
@@ -41,8 +41,12 @@ init_standard = -np.inf
 known_variance = False
 scaling_type = "custom"
 num_cycles = np.inf
-output_mode = "profile"
+cycle_output = True
 
 max_total_reps = np.full(10, np.inf)
 
 base_bit_generator_seed = 100
+
+use_rinott = True
+alpha_rinott = 0.05
+IZ_param = 0.1
