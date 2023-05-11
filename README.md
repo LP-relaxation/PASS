@@ -17,4 +17,4 @@ If the true standard, true means, or true variances are not known, these can be 
 
 The boundary function is calibrated for a 5\% expected false elimination rate based on an estimated variance using $10$ observations.
 
-Proper documentation coming soon, check back April 2023.
+Proper documentation coming soon.
